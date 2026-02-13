@@ -7,40 +7,43 @@
 <style>
 
 body{
- text-align:center;
- font-family:Segoe UI;
- background:black;
- color:white;
  margin:0;
- overflow-x:hidden;
+ font-family:Segoe UI;
+ color:white;
+ text-align:center;
 }
 
-/* Falling Hearts */
-.heart{
- position:fixed;
- top:-10px;
- color:red;
- animation:fall 5s linear infinite;
+/* PAGE BACKGROUNDS */
+
+#page1{
+ background:url('bg1.jpg') no-repeat center/cover;
+ min-height:100vh;
 }
 
-@keyframes fall{
- to{
-  transform:translateY(100vh);
- }
+#page2{
+ background:url('bg2.jpg') no-repeat center/cover;
+ min-height:100vh;
 }
 
-/* Container */
-.container{
- padding:30px 15px;
+#page3{
+ background:url('bg3.jpg') no-repeat center/cover;
+ min-height:100vh;
 }
 
-/* Images */
+/* overlay for readability */
+.overlay{
+ background:rgba(0,0,0,0.55);
+ min-height:100vh;
+ padding-top:40px;
+}
+
+/* profile images */
 img{
  width:140px;
  height:140px;
  border-radius:50%;
- margin:10px;
  border:3px solid white;
+ margin:10px;
 }
 
 /* LOVE button */
@@ -51,26 +54,29 @@ img{
  margin-top:20px;
 }
 
-/* Poem box */
+/* poem box */
 p{
+ width:85%;
+ margin:auto;
  font-size:18px;
  line-height:1.8;
- background:rgba(255,255,255,0.15);
+ background:rgba(0,0,0,0.5);
  padding:20px;
  border-radius:15px;
 }
 
-/* Gallery */
-.gallery img{
- width:90%;
- height:auto;
- border-radius:20px;
+/* SLIDESHOW BIG CIRCLE */
+#slide{
+ width:260px;
+ height:260px;
+ border-radius:50%;
+ border:5px solid white;
+ object-fit:cover;
+ margin-top:30px;
 }
 
-/* Name style */
 .names{
  font-size:26px;
- margin-top:10px;
  color:#ff4d6d;
 }
 
@@ -79,36 +85,35 @@ p{
 
 <body>
 
-<!-- SONG -->
-<audio autoplay loop>
-<source src="song.mp3" type="audio/mp3">
-</audio>
-
 <!-- PAGE 1 -->
 
-<div id="page1" class="container">
+<div id="page1">
+<div class="overlay">
 
 <h1>Welcome My Love ❤️</h1>
 
 <div class="names">Debnath ❤️ Wife_Name</div>
 
 <img src="photo1.jpg">
-<br>
-<span class="lovebtn" onclick="openPage2()">💖 ENTER 💖</span>
+
+<div class="lovebtn" onclick="openPage2()">💖 ENTER 💖</div>
 
 <img src="photo2.jpg">
 
 <h3 id="counter"></h3>
 
 </div>
+</div>
 
 <!-- PAGE 2 -->
 
-<div id="page2" style="display:none;" class="container">
+<div id="page2" style="display:none;">
+<div class="overlay">
 
 <h1>Happy Anniversary 💖</h1>
 
 <p>
+
 তোমাকে পাওয়ার পর থেকেই আমার জীবনটা নতুন করে শুরু হয়েছে।
 তুমি আমার সবচেয়ে সুন্দর অভ্যাস, সবচেয়ে বড় ভরসা।
 
@@ -116,15 +121,18 @@ p{
 আর প্রতিটা রাত তোমার হাত ধরে শেষ করতে চাই।
 
 শুভ বিবাহবার্ষিকী আমার ভালোবাসা 💖
+
 </p>
 
 <div class="lovebtn" onclick="openPage3()">💖 Memories 💖</div>
 
 </div>
+</div>
 
 <!-- PAGE 3 -->
 
-<div id="page3" style="display:none;" class="container">
+<div id="page3" style="display:none;">
+<div class="overlay">
 
 <h1>Our Beautiful Memories 📸</h1>
 
@@ -132,6 +140,7 @@ p{
 
 <h2>Forever & Always ❤️</h2>
 
+</div>
 </div>
 
 <script>
@@ -149,11 +158,10 @@ function openPage3(){
 /* DATE COUNTER */
 var countDownDate = new Date("March 6, 2024").getTime();
 
-var x = setInterval(function(){
+setInterval(function(){
 
 var now = new Date().getTime();
 var distance = now - countDownDate;
-
 var days = Math.floor(distance / (1000*60*60*24));
 
 document.getElementById("counter").innerHTML =
@@ -169,20 +177,6 @@ setInterval(function(){
  document.getElementById("slide").src=images[i];
  i=(i+1)%images.length;
 },2000);
-
-/* FALLING HEARTS */
-function createHeart(){
- var heart=document.createElement("div");
- heart.classList.add("heart");
- heart.innerHTML="💖";
- heart.style.left=Math.random()*100+"vw";
- heart.style.fontSize=Math.random()*20+10+"px";
- document.body.appendChild(heart);
-
- setTimeout(()=>{heart.remove();},5000);
-}
-
-setInterval(createHeart,300);
 
 </script>
 
