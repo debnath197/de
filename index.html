@@ -1,83 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Anniversary ❤️</title>
+<title>Our Love Story ❤️</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
 <style>
 
 body{
  margin:0;
  font-family:Segoe UI;
- color:white;
  text-align:center;
+ color:white;
+ overflow-x:hidden;
 }
 
-/* PAGE BACKGROUNDS */
+/* MAP */
 
-#page1{
- background:url('bg1.jpg') no-repeat center/cover;
- min-height:100vh;
-}
+#map{ height:100vh; }
+
+/* BACKGROUNDS */
 
 #page2{
- background:url('bg2.jpg') no-repeat center/cover;
- min-height:100vh;
-}
-
-#page3{
- background:url('bg3.jpg') no-repeat center/cover;
- min-height:100vh;
-}
-
-/* overlay for readability */
-.overlay{
- background:rgba(0,0,0,0.55);
+ display:none;
+ background:url('bg2.jpg') center/cover;
  min-height:100vh;
  padding-top:40px;
 }
 
-/* profile images */
-img{
- width:140px;
- height:140px;
- border-radius:50%;
- border:3px solid white;
- margin:10px;
+#page3{
+ display:none;
+ background:url('bg3.jpg') center/cover;
+ min-height:100vh;
+ padding-top:40px;
 }
 
-/* LOVE button */
+/* BUTTON */
+
 .lovebtn{
- font-size:28px;
+ font-size:26px;
  color:yellow;
+ background:black;
+ padding:12px 25px;
+ border-radius:12px;
+ display:inline-block;
+ margin-top:25px;
  cursor:pointer;
- margin-top:20px;
 }
 
-/* poem box */
-p{
+/* POEM BOX */
+
+.poem{
+ background:rgba(0,0,0,0.5);
+ padding:20px;
+ border-radius:15px;
  width:85%;
  margin:auto;
  font-size:18px;
  line-height:1.8;
- background:rgba(0,0,0,0.5);
- padding:20px;
- border-radius:15px;
 }
 
-/* SLIDESHOW BIG CIRCLE */
+/* BIG CIRCLE SLIDESHOW */
+
 #slide{
- width:260px;
- height:260px;
+ width:270px;
+ height:270px;
  border-radius:50%;
- border:5px solid white;
+ border:6px solid white;
  object-fit:cover;
  margin-top:30px;
 }
 
-.names{
- font-size:26px;
- color:#ff4d6d;
+/* FALLING HEART */
+
+.heart{
+ position:fixed;
+ top:-10px;
+ animation:fall 5s linear infinite;
+ color:red;
+}
+
+@keyframes fall{
+ to{ transform:translateY(100vh); }
 }
 
 </style>
@@ -85,54 +91,53 @@ p{
 
 <body>
 
-<!-- PAGE 1 -->
+<!-- 🎶 SONG -->
 
-<div id="page1">
-<div class="overlay">
+<audio autoplay loop>
+<source src="song.mp3" type="audio/mp3">
+</audio>
 
-<h1>Welcome My Love ❤️</h1>
+<!-- 💖 PAGE 1 MAP -->
 
-<div class="names">Debnath ❤️ Wife_Name</div>
+<div id="map"></div>
 
-<img src="photo1.jpg">
-
-<div class="lovebtn" onclick="openPage2()">💖 ENTER 💖</div>
-
-<img src="photo2.jpg">
-
-<h3 id="counter"></h3>
-
-</div>
+<div class="lovebtn" onclick="openPage2()" style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);">
+💖 ENTER LOVE 💖
 </div>
 
-<!-- PAGE 2 -->
+<!-- 💌 PAGE 2 POEM -->
 
-<div id="page2" style="display:none;">
-<div class="overlay">
+<div id="page2">
 
-<h1>Happy Anniversary 💖</h1>
+<h1>Happy Anniversary ❤️</h1>
 
-<p>
+<div id="counter"></div>
 
-তোমাকে পাওয়ার পর থেকেই আমার জীবনটা নতুন করে শুরু হয়েছে।
-তুমি আমার সবচেয়ে সুন্দর অভ্যাস, সবচেয়ে বড় ভরসা।
+<div class="poem">
 
-প্রতিটা সকাল তোমার নাম দিয়ে শুরু করতে চাই,
-আর প্রতিটা রাত তোমার হাত ধরে শেষ করতে চাই।
+দুইটা আলাদা ঠিকানা থেকে শুরু হয়েছিল আমাদের গল্প,  
+দুইটা আলাদা রাস্তা এসে আজ এক হয়ে গেছে।  
 
-শুভ বিবাহবার্ষিকী আমার ভালোবাসা 💖
+এই মানচিত্রে লাল দাগে যে দূরত্বটা দেখা যায়,  
+সেটা শুধু কাগজে —  
+আমার হৃদয়ে তুমি সবসময় একদম কাছেই 💖  
 
-</p>
+তোমার শহর থেকে আমার শহর,  
+এই পথটা ভালোবাসায় ভরা…  
+প্রতিটা kilometre বলে —  
+আমরা একে অপরের জন্যই তৈরি ❤️  
+
+শুভ বিবাহবার্ষিকী আমার জীবন 🌍💍  
+
+</div>
 
 <div class="lovebtn" onclick="openPage3()">💖 Memories 💖</div>
 
 </div>
-</div>
 
-<!-- PAGE 3 -->
+<!-- 📸 PAGE 3 SLIDESHOW -->
 
-<div id="page3" style="display:none;">
-<div class="overlay">
+<div id="page3">
 
 <h1>Our Beautiful Memories 📸</h1>
 
@@ -141,42 +146,77 @@ p{
 <h2>Forever & Always ❤️</h2>
 
 </div>
-</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
 
-/* PAGE SWITCH */
+/* ❤️ MAP */
+
+var map = L.map('map').setView([23.855,88.18],12);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+var boyIcon = L.icon({ iconUrl:'photo1.jpg', iconSize:[60,60] });
+var girlIcon = L.icon({ iconUrl:'photo2.jpg', iconSize:[60,60] });
+
+var loc1=[23.851214425156524,88.16606980033228];
+var loc2=[23.860264789656124,88.19689438772542];
+
+L.marker(loc1,{icon:boyIcon}).addTo(map);
+L.marker(loc2,{icon:girlIcon}).addTo(map);
+
+L.polyline([loc1,loc2],{color:'red',weight:4}).addTo(map);
+
+
+/* 💖 PAGE SWITCH */
+
 function openPage2(){
- page1.style.display="none";
- page2.style.display="block";
-}
-function openPage3(){
- page2.style.display="none";
- page3.style.display="block";
+ document.getElementById("map").style.display="none";
+ document.getElementById("page2").style.display="block";
 }
 
-/* DATE COUNTER */
-var countDownDate = new Date("March 6, 2024").getTime();
+function openPage3(){
+ document.getElementById("page2").style.display="none";
+ document.getElementById("page3").style.display="block";
+}
+
+
+/* 💍 DAY COUNTER */
+
+var date=new Date("March 6, 2024").getTime();
 
 setInterval(function(){
-
-var now = new Date().getTime();
-var distance = now - countDownDate;
-var days = Math.floor(distance / (1000*60*60*24));
-
-document.getElementById("counter").innerHTML =
-days + " days of togetherness 💍";
-
+ var now=new Date().getTime();
+ var d=Math.floor((now-date)/(1000*60*60*24));
+ document.getElementById("counter").innerHTML=d+" days of togetherness 💖";
 },1000);
 
-/* SLIDESHOW */
-var images=["w1.jpg","w2.jpg","w3.jpg","w4.jpg","w5.jpg","w6.jpg","w7.jpg","w8.jpg","w9.jpg","w10.jpg"];
+
+/* 📸 SLIDESHOW */
+
+var img=["w1.jpg","w2.jpg","w3.jpg","w4.jpg","w5.jpg","w6.jpg","w7.jpg","w8.jpg","w9.jpg","w10.jpg"];
 var i=0;
 
 setInterval(function(){
- document.getElementById("slide").src=images[i];
- i=(i+1)%images.length;
+ document.getElementById("slide").src=img[i];
+ i=(i+1)%img.length;
 },2000);
+
+
+/* 💞 FALLING HEARTS */
+
+function heart(){
+ var h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="💖";
+ h.style.left=Math.random()*100+"vw";
+ h.style.fontSize=(Math.random()*20+10)+"px";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),5000);
+}
+
+setInterval(heart,300);
 
 </script>
 
